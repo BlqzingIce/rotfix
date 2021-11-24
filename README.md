@@ -1,6 +1,6 @@
 # Z-Rot Fixer
 
-fixes the z rot for the left controller
+A mod that fixes how the game manages the z rotation setting for the left controller.
 
 ## Credits
 
