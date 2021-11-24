@@ -5,10 +5,10 @@
     "id": "rotfix",
     "author": "BlqzingIce",
     "version": "0.1.0",
-    "coverImage": "cover.jpg",
     "packageId": "com.beatgames.beatsaber",
     "packageVersion": "1.17.1",
     "description": "this mod simply fixes how the game handles the z rotation setting for the left controller",
+    "coverImage": "cover.jpg",
     "modFiles": [
         "librotfix.so"
     ],
