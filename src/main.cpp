@@ -1,4 +1,24 @@
 #include "main.hpp"
+#include "GlobalNamespace/OculusVRHelper.hpp"
+#include "UnityEngine/Vector3.hpp"
+#include "UnityEngine/XR/XRNode.hpp"
+
+MAKE_HOOK_MATCH(
+    AdjustControllerTransform, 
+    &GlobalNamespace::OculusVRHelper::AdjustControllerTransform, 
+    void, 
+    GlobalNamespace::OculusVRHelper* self,
+    UnityEngine::XR::XRNode node, 
+    UnityEngine::Transform* transform, 
+    UnityEngine::Vector3 position, 
+    UnityEngine::Vector3 rotation
+    ) 
+{
+    if(node == UnityEngine::XR::XRNode::LeftHand) { //test for left hand
+        rotation.z = -rotation.z; //fixes rotation
+    }
+    AdjustControllerTransform(self, node, transform, position, rotation);
+}
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -24,11 +44,6 @@ extern "C" void setup(ModInfo& info) {
     getConfig().Load(); // Load the config file
     getLogger().info("Completed setup!");
 }
-
-MAKE_HOOK_MATCH(AdjustControllerTransform, &GlobalNamespace::OculusVRHelper::AdjustControllerTransform, void, &GlobalNamespace::OculusVRHelper) {
-    AdjustControllerTransform();
-}
-
 
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
